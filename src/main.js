@@ -1,8 +1,20 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import App from './App.vue';
+import Home from '../src/pages/home/Home';
+import Projects from '../src/pages/projects/Projects';
 
-Vue.config.productionTip = false
+Vue.use(VueRouter);
+
+const routes = [
+  { path: '/', component: Home },
+  { path: '/projects', component: Projects }
+];
+const router = new VueRouter({ routes, mode: 'history' });
+
+Vue.config.productionTip = false;
 
 new Vue({
   render: h => h(App),
-}).$mount('#app')
+  router
+}).$mount('#app');
