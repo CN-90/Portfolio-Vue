@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="home__textbox">
-      <h1 class="primary-header"><span>C</span>HRISTIAN REVEL</h1>
+      <h1 class="primary-header">
+        <span>C</span>HRISTIAN REVEL
+      </h1>
       <h2 class="secondary-header">Web Developer & Designer</h2>
       <button class="home__cta">Contact Me</button>
     </div>
@@ -23,28 +25,30 @@
 </template>
 
 <script>
-import gsap from 'gsap';
+import gsap from "gsap";
 
 export default {
-  name: 'Home',
+  name: "Home",
   mounted() {
-    gsap.from('.primary-header', { x: -200, opacity: 0 });
+    let timeline = gsap.timeline();
+    timeline
+      .from(".primary-header", 0.3, { y: 100, opacity: 0 })
+      .from(".secondary-header", 0.3, { y: 100, opacity: 0 })
+      .from(".home__cta", 0.3, { y: 100, opacity: 0 });
+    gsap.from(".codebox", 0.8, { y: -200, opacity: 0 });
   },
 
-  methods: {
-    leave: function(el, done) {
-      console.log(el);
-    }
-  }
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/main';
+@import "../../styles/main";
 
 .home {
   display: flex;
   align-items: center;
+  margin-left: 20%;
 
   span {
     font-size: 11rem;
@@ -98,7 +102,7 @@ export default {
 }
 
 // medium sized
-@media only screen and (max-width: '1200px') {
+@media only screen and (max-width: "1200px") {
   .home {
     &__textbox {
       margin-left: 1.8rem;
@@ -126,8 +130,9 @@ export default {
   }
 }
 
-@media only screen and (max-width: '900px') {
+@media only screen and (max-width: "900px") {
   .home {
+    margin-left: 0%;
     position: relative;
     height: 100vh;
     width: 100%;
@@ -160,7 +165,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: '900px') and (orientation: landscape) {
+@media only screen and (max-width: "900px") and (orientation: landscape) {
   .home {
     span {
       font-size: 10rem;
@@ -181,7 +186,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: '800px') {
+@media only screen and (max-width: "800px") {
   .home {
     span {
       font-size: 6rem;
@@ -201,7 +206,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: '800px') and (orientation: landscape) {
+@media only screen and (max-width: "800px") and (orientation: landscape) {
   .home {
     span {
       font-size: 8rem;

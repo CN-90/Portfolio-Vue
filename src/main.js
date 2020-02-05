@@ -10,7 +10,11 @@ const routes = [
   { path: '/', component: Home },
   { path: '/projects', component: Projects }
 ];
-const router = new VueRouter({ routes, mode: 'history' });
+const router = new VueRouter({
+  routes,
+  mode: 'history',
+  linkExactActiveClass: 'active'
+});
 
 Vue.config.productionTip = false;
 

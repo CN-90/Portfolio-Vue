@@ -10,55 +10,62 @@
 
     <div class="menu">
       <ul>
-        <li id="home" class="menu__option">
+        <li @click="changeCurrentlySelected('home')" id="home" class="menu__option">
           <router-link to="/">Home</router-link>
         </li>
-        <li id="projects" class="menu__option">
+        <li @click="changeCurrentlySelected('projects')" id="projects" class="menu__option">
           <router-link to="/projects">Projects</router-link>
         </li>
-        <li id="contact" class="menu__option">
-          Contact
-        </li>
+
+        <li id="contact" class="menu__option">Contact</li>
       </ul>
     </div>
 
     <div class="social-media">
       <a target="_blank" href="https://github.com/CN-90">
-        <i class="fab fa-github fa-3x"></i>
+        <i class="fadeIn fab fa-github fa-3x"></i>
       </a>
-      <a href>
-        <i class="fab fa-linkedin-in fa-3x"></i>
+      <a target="_blank" href>
+        <i class="fadeIn fab fa-linkedin-in fa-3x"></i>
       </a>
     </div>
   </nav>
 </template>
 
 <script>
-import Animations from '../../utils/Animations';
+import gsap from "gsap";
 
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   props: [],
-  mounted() {},
+  mounted() {
+    if (this.$router.currentRoute.path === "/") {
+      this.currentlySelected = "home";
+    } else {
+      this.currentlySelected = "projects";
+    }
+    gsap.to(`#${this.currentlySelected}`, { x: 5 });
+  },
   data: function() {
     return {
-      currentlySelected: 'home'
+      currentlySelected: "home"
     };
   },
   methods: {
-    setCurrentlySelected(currentOption) {
-      this.currentlySelected = currentOption;
-      console.log(this.currentlySelected);
-      console.log(this.$route);
+    changeCurrentlySelected(selector) {
+      this.timeline = gsap.timeline();
+      this.timeline.to(`#${this.currentlySelected}`, 0.2, { x: 0 });
+      this.currentlySelected = selector;
+      this.timeline.to(`#${this.currentlySelected}`, 0.2, { x: 5 });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/main';
+@import "../../styles/main";
 .navbar {
-  position: relative;
+  position: fixed;
   width: 20%;
   height: 100%;
   display: flex;
@@ -68,7 +75,7 @@ export default {
     height: 80%;
     left: 0;
     width: 2px;
-    background: linear-gradient(to bottom, #312e2e, #1a1a1a);
+    background: linear-gradient(to bottom, #201f1f, #1a1a1a);
     margin-top: 10rem;
     position: absolute;
   }
@@ -105,7 +112,7 @@ export default {
 
   /* Logo End */ /* Logo End */
   .menu {
-    margin-top: 7rem;
+    margin-top: 4rem;
     padding-left: 2rem;
 
     &__option {
@@ -119,6 +126,9 @@ export default {
         color: $white;
       }
     }
+
+    #contact {
+    }
   }
 
   .social-media {
@@ -127,23 +137,33 @@ export default {
     left: 10px;
     display: flex;
 
+    a {
+      animation: fadeIn 0.3s linear;
+      opacity: 0;
+      animation-fill-mode: both;
+    }
+
+    a:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
     .fa-github {
       margin-bottom: 1rem;
       margin-right: 1rem;
     }
 
     .fab {
-      color: #cccccc;
+      color: $primary-green;
       cursor: pointer;
 
       &:hover {
-        color: $primary-green;
+        color: #cccccc;
       }
     }
   }
 }
 
-@media only screen and (max-width: '900px') {
+@media only screen and (max-width: "900px") {
   .navbar {
     width: 100%;
     height: auto;
@@ -168,6 +188,16 @@ export default {
     .social-media {
       display: none;
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
   }
 }
 </style>
