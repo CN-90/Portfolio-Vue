@@ -1,12 +1,21 @@
 <template>
-  <div class="projects">
-    <Project :toggleModal="openModal" v-if="this.modalActive" :project="projects[0]"></Project>
-    <ProjectCard
-      :toggleModal="openModal"
-      :key="project.title"
-      v-for="project in projects"
-      :project="project"
-    ></ProjectCard>
+  <div class="projects" ref="projects">
+    <div class="codebox">
+      &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta
+      charset=&quot;utf-8&quot;&gt; &lt;title&gt;&lt;/title&gt; &lt;meta
+      name=&quot;author&quot; content=&quot;&quot;&gt; &lt;meta
+      name=&quot;description&quot; content=&quot;&quot;&gt; &lt;meta
+      name=&quot;viewport&quot; content=&quot;width=device-width,
+      initial-scale=1&quot;&gt; &lt;link href=&quot;css/normalize.css&quot;
+      rel=&quot;stylesheet&quot;&gt; &lt;link href=&quot;css/style.css&quot;
+      rel=&quot;stylesheet&quot;&gt; &lt;/head&gt; &lt;body&gt; &lt;p&gt;Hello,
+      world!&lt;/p&gt; &lt;script
+      src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+      &lt;script src=&quot;js/script.js&quot;&gt;&lt;/script&gt; &lt;/body&gt;
+      &lt;/html&gt;
+    </div>
+    <!-- <Project :toggleModal="openModal" v-if="this.modalActive" :project="this.currentProject"></Project> -->
+    <ProjectCard :key="project.title" v-for="project in projects" :project="project"></ProjectCard>
   </div>
 </template>
 
@@ -25,19 +34,16 @@ export default {
   mounted() {
     let timeline = gsap.timeline();
     timeline.from(".animate", 0.8, { y: 60, opacity: 0, stagger: 0.3 });
+    gsap.from(".codebox", 0.9, { y: -150, opacity: 0 });
   },
   data: function() {
     return {
-      projects: projects,
+      projects,
       currentProject: null,
       modalActive: false
     };
   },
-  methods: {
-    openModal() {
-      this.modalActive = !this.modalActive;
-    }
-  }
+  methods: {}
 };
 </script>
 
@@ -54,11 +60,26 @@ export default {
   .codebox {
     position: absolute;
     left: 0;
-    width: 20%;
-    height: 20%;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
     z-index: -1;
-    font-size: 6vh;
-    color: #252525;
+    font-size: 9vh;
+    color: #1a1a1a;
+  }
+}
+
+@media only screen and (max-width: "1100px") {
+  .projects {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .animate {
+    width: 70%;
+    height: 70%;
   }
 }
 
@@ -69,17 +90,22 @@ export default {
     margin-left: 0%;
     justify-content: center;
     align-items: center;
-    margin-top: 20%;
   }
 
   .animate {
-    width: 60%;
+    width: 70%;
+    height: 70%;
   }
 }
 
-@media only screen and (max-width: "700px") {
+@media only screen and (max-width: "750px") {
+  .projects {
+    margin-top: 15rem;
+  }
+
   .animate {
-    width: 80%;
+    width: 90%;
+    width: 90%;
   }
 }
 </style>

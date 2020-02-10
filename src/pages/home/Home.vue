@@ -32,8 +32,14 @@ export default {
   mounted() {
     let timeline = gsap.timeline();
     timeline
-      .from(".primary-header", 0.3, { y: 100, opacity: 0 })
-      .from(".secondary-header", 0.3, { y: 100, opacity: 0 })
+      .from(".primary-header", 0.3, {
+        y: 100,
+        opacity: 0
+      })
+      .from(".secondary-header", 0.3, {
+        y: 100,
+        opacity: 0
+      })
       .from(".home__cta", 0.3, { y: 100, opacity: 0 });
     gsap.from(".codebox", 0.8, { y: -200, opacity: 0 });
   },
@@ -49,6 +55,7 @@ export default {
   display: flex;
   align-items: center;
   margin-left: 20%;
+  height: 100vh;
 
   span {
     font-size: 11rem;
@@ -89,7 +96,7 @@ export default {
     right: 5%;
     top: 0;
     height: 100vh;
-    width: 35vh;
+    width: 45vh;
     color: #252525;
     font-size: 4.5vh;
     overflow: hidden;

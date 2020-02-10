@@ -1,6 +1,6 @@
 // Project Images
 import movieHub from '../assets/moviehub2.jpg';
-import fourHorse from '../assets/fourhorse.jpg';
+import fourHorse from '../assets/fourhorsemen.jpg';
 
 // Tool images
 import htmlImg from '../assets/html.png';
@@ -10,6 +10,7 @@ import firebaseImg from '../assets/firebase.png';
 import sassImg from '../assets/Sass.png';
 import styledComp from '../assets/styled-components.png';
 import movieDB from '../assets/moviedb.png';
+import javascriptImg from '../assets/javascript.png';
 
 const projects = [
   {
@@ -24,16 +25,18 @@ const projects = [
       { name: 'SASS', img: sassImg },
       { name: 'Styled Comp.', img: styledComp },
       { name: 'MovieDB API', img: movieDB }
-    ]
+    ],
+    links: { github: '', live: '' }
   },
   {
     title: 'Four Horsemen',
     img: fourHorse,
     description:
-      'Website I built for a ficticious tattoo parlor to practice my design and basic HTML and CSS skills. Built with HTML, SCSS and Javascript.',
+      'This is a website I built for a ficticious tattoo parlor to practice my design, HTML and CSS skills. Built with HTML, SCSS and Javascript and the Google maps API',
     tools: [
       { name: 'HTML', img: htmlImg },
-      { name: 'SASS', img: sassImg }
+      { name: 'SASS', img: sassImg },
+      { name: 'Javascript', img: javascriptImg }
     ]
   }
 ];

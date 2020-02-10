@@ -21,6 +21,7 @@ export default {
 
 <style lang="scss" scoped>
 .tool {
+  font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +30,9 @@ export default {
   max-width: 40px;
   transform: translateX(-10px);
   transition: opacity 0.2s ease-in, transform 0.2s ease-in;
-  margin: 0rem 1.5rem;
+  margin: 1rem 1.5rem;
+  color: rgb(240, 240, 240);
+
   &-img {
     max-height: 60%;
     min-height: 60%;
@@ -47,6 +50,22 @@ export default {
     font-size: 1.5rem;
     padding-top: 1rem;
     text-align: center;
+  }
+}
+
+@media only screen and (max-width: "900px") {
+  .tool {
+    &-name {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: "750px") {
+  .tool {
+    &-name {
+      font-size: 2rem;
+    }
   }
 }
 </style>

@@ -11,14 +11,18 @@
     <div class="menu">
       <ul>
         <li @click="changeCurrentlySelected('home')" id="home" class="menu__option">
-          <router-link to="/">Home</router-link>
+          <router-link active-class="active" exact to="/">Home</router-link>
         </li>
         <li @click="changeCurrentlySelected('projects')" id="projects" class="menu__option">
-          <router-link to="/projects">Projects</router-link>
+          <router-link active-class="active" to="/projects">Projects</router-link>
         </li>
 
         <li id="contact" class="menu__option">Contact</li>
       </ul>
+    </div>
+
+    <div @click="toggleMenu()" class="navbar__hamburger">
+      <div class="line"></div>
     </div>
 
     <div class="social-media">
@@ -37,7 +41,9 @@ import gsap from "gsap";
 
 export default {
   name: "Navbar",
-  props: [],
+  props: {
+    toggleMenu: Function
+  },
   mounted() {
     if (this.$router.currentRoute.path === "/") {
       this.currentlySelected = "home";
@@ -81,10 +87,11 @@ export default {
   }
 
   .logo {
-    color: $white;
+    color: #f5f4f4;
     font-size: 4.5rem;
-    margin-top: 2rem;
     position: relative;
+    top: 1rem;
+
     &__header {
       margin-top: 1.2rem;
       letter-spacing: 2px;
@@ -114,9 +121,11 @@ export default {
   .menu {
     margin-top: 4rem;
     padding-left: 2rem;
+    width: 30%;
+    font-family: "Poppins", sans-serif;
 
     &__option {
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.5rem;
       font-size: 2rem;
       cursor: pointer;
       width: 25%;
@@ -126,8 +135,40 @@ export default {
         color: $white;
       }
     }
+  }
 
-    #contact {
+  &__hamburger {
+    width: 25px;
+    height: 30px;
+    display: none;
+    margin-right: 5rem;
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+
+    .line {
+      height: 2px;
+      width: 100%;
+      background: $white;
+      top: 0;
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        top: 30%;
+        background: $white;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        bottom: 30%;
+        background: $white;
+      }
     }
   }
 
@@ -165,16 +206,28 @@ export default {
 
 @media only screen and (max-width: "900px") {
   .navbar {
-    width: 100%;
-    height: auto;
+    width: 100vw;
+    height: 80px;
     flex-direction: row;
+    top: 0;
+    left: 0;
+    align-items: center;
+    position: fixed;
+    background: rgba(21, 20, 20, 0.4);
+    z-index: 5;
+    justify-content: space-between;
+
     .menu {
       display: none;
     }
 
     .logo {
+      margin-left: 2rem;
+      font-size: 5rem;
+      top: 0;
       .brackets {
         margin: 0;
+        font-size: 6rem;
       }
 
       .right {
@@ -187,6 +240,10 @@ export default {
 
     .social-media {
       display: none;
+    }
+
+    &__hamburger {
+      display: block;
     }
   }
 }

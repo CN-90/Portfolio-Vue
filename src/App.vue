@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <Navbar></Navbar>
+    <Navbar :toggleMenu="toggleMenuHandler"></Navbar>
+    <Menu v-if="toggleMenu" :toggleMenu="toggleMenuHandler"></Menu>
     <transition name="slide" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -9,6 +10,7 @@
 
 <script>
 import Navbar from "./components/navbar/Navbar";
+import Menu from "./components/menu/Menu";
 import Home from "./pages/home/Home";
 import gsap from "gsap";
 export default {
@@ -16,9 +18,19 @@ export default {
   currentlySelected: "home",
   components: {
     Navbar,
-    Home
+    Home,
+    Menu
   },
-  methods: {}
+  data: function() {
+    return {
+      toggleMenu: false
+    };
+  },
+  methods: {
+    toggleMenuHandler() {
+      this.toggleMenu = !this.toggleMenu;
+    }
+  }
 };
 </script>
 

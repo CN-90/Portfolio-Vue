@@ -1,5 +1,5 @@
 <template>
-  <div class="animate">
+  <div class="animate" v-on:click="handleProjectClick">
     <div class="project-card">
       <div class="project-tools">
         <h4>Built With</h4>
@@ -7,7 +7,7 @@
           <ToolCard :key="tool.name" v-for="tool in project.tools" :tool="tool"></ToolCard>
         </div>
       </div>
-      <button v-on:click="toggleModal()">View Project</button>
+      <button>View Project</button>
       <img :src="project.img" alt />
       <h1 class="project-card__title">{{project.title}}</h1>
     </div>
@@ -26,7 +26,14 @@ export default {
   components: {
     ToolCard
   },
-  mounted() {}
+  methods: {
+    handleProjectClick() {
+      this.$router.push({
+        name: `projects`,
+        params: { id: this.project.title }
+      });
+    }
+  }
 };
 </script>
 
@@ -37,18 +44,19 @@ export default {
 .animate {
   width: 47%;
   height: 40%;
+  min-height: 300px;
   margin: 1rem;
+  margin-top: 10rem;
 }
 .project-card {
-  margin: 1rem;
   position: relative;
   height: 100%;
   width: 100%;
   color: white;
   background: #232323;
-  margin-top: 8rem;
   transform: translateY(0px);
   transition: transform 0.4s ease-in-out;
+  font-family: "Poppins", sans-serif;
 
   .tool {
     opacity: 0;
@@ -110,11 +118,12 @@ export default {
     border: none;
     position: absolute;
     left: 50%;
-    top: 70%;
+    top: 80%;
     margin-left: -70px;
-    background: rgb(34, 34, 34);
+    background: #414141;
     font-weight: bold;
-    color: white;
+    color: #ffffff;
+    outline: none;
     cursor: pointer;
     font-size: 1.7rem;
     opacity: 0;
@@ -124,7 +133,7 @@ export default {
 
     &:hover {
       background: $primary-green;
-      color: black;
+      color: #161515;
     }
   }
 
@@ -139,7 +148,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       position: relative;
-      top: 1.5rem;
+      top: 0.5rem;
     }
   }
 
@@ -149,6 +158,36 @@ export default {
     letter-spacing: 1px;
     transform: translateX(-10px);
     transition: transform 0.4s linear, opacity 0.3s linear;
+  }
+}
+
+@media only screen and (max-width: "1300px") {
+  .project-card {
+    button {
+      padding: 1rem 2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: "900px") {
+  .animate {
+    margin-top: 15rem;
+  }
+  .project-card {
+    button {
+      padding: 2rem 5rem;
+      margin-left: -60px;
+      font-size: 2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: "750px") {
+  .animate {
+    margin-bottom: 8rem;
+    width: 95%;
+    margin-top: 3rem;
+    min-height: 0;
   }
 }
 </style>
